@@ -1,10 +1,13 @@
 from enum import Enum
 
-
 class Status(Enum):
     FREI = "frei"
     BELEGT = "belegt"
     RESERVIERT = "reserviert"
+
+
+def bereich(eingabe, unten, oben) -> bool:
+    return unten <= eingabe <= oben
 
 
 PP = [Status.FREI] * 10
@@ -22,7 +25,7 @@ while True:
 
         platz = int(input("Parkplatznummer: "))
 
-        if not 1 <= platz <= 10:
+        if not bereich(platz, 1, 10):
             print("Parkplatznummer muss zwischen 1 und 10 liegen!")
             continue
 
