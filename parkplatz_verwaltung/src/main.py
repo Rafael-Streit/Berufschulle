@@ -5,9 +5,7 @@ class Status(Enum):
     BELEGT = "belegt"
     RESERVIERT = "reserviert"
 
-
-def bereich(eingabe, unten, oben) -> bool:
-    return unten <= eingabe <= oben
+bereich = lambda eingabe, unten, oben:unten <= eingabe <= oben
 
 
 PP = [Status.FREI] * 10
