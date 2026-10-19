@@ -1,31 +1,35 @@
-status_text = {
-    0: "frei",
-    1: "belegt",
-    2: "reserviert"
-}
+from enum import Enum
 
-PP = [0] * 10
+
+class Status(Enum):
+    FREI = "frei"
+    BELEGT = "belegt"
+    RESERVIERT = "reserviert"
+
+
+PP = [Status.FREI] * 10
 
 while True:
     for i, status in enumerate(PP, start=1):
-        print(f"Parkplatz {i} ist {status_text[status]}")
+        print(f"Parkplatz {i} ist {status.value}")
+
+    status_input = input(
+        "\nStatus eingeben (frei, belegt, reserviert): "
+    ).lower()
 
     try:
-        status = int(input("\nStatus (0=frei, 1=belegt, 2=reserviert): "))
-        platz = int(input("Parkplatznummer: "))
+        status = Status(status_input)
 
-        if status not in [0, 1, 2]:
-            print("Status muss 0, 1 oder 2 sein!")
-            continue
+        platz = int(input("Parkplatznummer: "))
 
         if not 1 <= platz <= 10:
             print("Parkplatznummer muss zwischen 1 und 10 liegen!")
             continue
 
         PP[platz - 1] = status
-        print(f"Parkplatz {platz} wurde {status_text[status]}")
+        print(f"Parkplatz {platz} wurde {status.value}")
 
     except ValueError:
-        print("Fehler: Bitte nur ganze Zahlen eingeben!")
+        print("Ungültiger Status oder Parkplatznummer!")
 
     print("-" * 40)
